@@ -33,7 +33,8 @@ public class FoodTruck {
 						.append("\tFood Type: ")
 						.append(foodType)
 						.append("\tRating: ")
-						.append(rating +"\t");
+						.append("(" + rating + "/5) ")
+						.append(getStars());
 		return menu.toString();
 	}
 
@@ -63,5 +64,14 @@ public class FoodTruck {
 
 	public void setRating(int rating) {
 		this.rating = rating;
+	}
+	
+	public String getStars() {
+		//int a = getRating() - 5;
+		String stars = "";
+		for (int i = 0; i < getRating(); i++) {
+			stars += " \u2b50";
+		}
+		return stars;
 	}
 }

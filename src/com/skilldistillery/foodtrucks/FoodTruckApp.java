@@ -47,10 +47,10 @@ public class FoodTruckApp {
 				.append(" FOOD TRUCK REVIEWS  \n")
 				.append("_____ - Menu - _____\n")
 			    .append(" 1. Rate trucks\n")
-			    .append(" 2. See ratings \u2b50\n")
+			    .append(" 2. See ratings\n")
 			    .append(" 3. Average rating\n")
 			    .append(" 4. Best truck\n")
-			    .append(" 5. Quit\n");
+			    .append(" 5. Quit");
 		System.out.println(menu);
 	}
 
@@ -84,7 +84,14 @@ public class FoodTruckApp {
 			System.out.print("Food type: ");
 			String foodType = kb.nextLine();
 			System.out.print("numeric rating (1-5): ");
+			
+			
+			
 			int rating = kb.nextInt();
+			while (rating > 5) {
+				System.out.print("Error, enter a rating 1 - 5: ");
+				rating = kb.nextInt();
+			}
 			kb.nextLine();
 
 			//truck[i] = new FoodTruck(truckName, foodType, rating);
