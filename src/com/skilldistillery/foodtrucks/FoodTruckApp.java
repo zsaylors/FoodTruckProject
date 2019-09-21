@@ -87,7 +87,10 @@ public class FoodTruckApp {
 			int rating = kb.nextInt();
 			kb.nextLine();
 
-			truck[i] = new FoodTruck(truckName, foodType, rating);
+			truck[i] = new FoodTruck();
+			truck[i].setTruckName(truckName);
+			truck[i].setFoodType(foodType);
+			truck[i].setRating(rating);
 			}
 		}
 		
@@ -124,8 +127,9 @@ public class FoodTruckApp {
 			System.out.println("You have not entered any data in yet!");
 		}
 		else {
+			System.out.println("ID \t Name \t Food Type \t Rating");
 			for (int i = 0; i < truckList.length; i++) {
-				System.out.println(truckList[i].output());
+				System.out.println(truckList[i].toString());
 			}
 		}
 	}
@@ -155,7 +159,7 @@ public class FoodTruckApp {
 			for (int i = 0; i < truckList.length; i++) {
 				if (highestRating < truckList[i].getRating()){
 					highestRating = truckList[i].getRating();
-					bestTruck = truckList[i].output();
+					bestTruck = truckList[i].toString();
 				}
 			} System.out.println(bestTruck);
 		}

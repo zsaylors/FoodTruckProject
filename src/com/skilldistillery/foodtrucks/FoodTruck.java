@@ -18,26 +18,24 @@ public class FoodTruck {
 	}
 	
 	public FoodTruck(int truckId, String truckName, String foodType, int rating) {
-		this.truckId = truckId;
+		FoodTruck.truckId = truckId;
 		this.truckName = truckName;
 		this.foodType = foodType;
 		this.rating = rating;
 	}
 
 	// M E T H O D S
-	public String output() {
-		return getTruckName() + " " + foodType + " " + rating;
+	public String toString() {
+		StringBuilder menu = new StringBuilder("ID: ")
+						.append(truckId++)
+						.append("\tTruck Name: ")
+						.append(getTruckName())
+						.append("\tFood Type: ")
+						.append(foodType)
+						.append("\tRating: ")
+						.append(rating +"\t");
+		return menu.toString();
 	}
-	
-	public static int getTruckId() {
-		return truckId;
-	}
-
-
-	public static void setTruckId(int truckId) {
-		FoodTruck.truckId = truckId;
-	}
-
 
 	public String getTruckName() {
 		return truckName;
@@ -63,7 +61,7 @@ public class FoodTruck {
 	}
 
 
-	public void setRating(String truckName) {
+	public void setRating(int rating) {
 		this.rating = rating;
 	}
 	
