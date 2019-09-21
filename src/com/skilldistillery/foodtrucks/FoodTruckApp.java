@@ -52,10 +52,12 @@ public class FoodTruckApp {
 			// String used rather than int, so user entered strings or chars won't break program.
 			String userSelection = kb.next();
 			switch(userSelection) {
-				case "1": exception(kb, truck, run);
-						  getUserInput(kb, truck);
+				case "1": if (exception(kb, truck, run)) {
+							  getUserInput(kb, truck);
+							  run = false;
+						  }
 						  break;
-				case "2": viewRatings(kb, truck);
+				case "2": viewRatings(truck);
 						  break;
 				case "3": averageRatings(truck);
 						  break;
@@ -85,7 +87,7 @@ public class FoodTruckApp {
 	}
 
 	// CASE 2:   List all existing food trucks.
-	public void viewRatings(Scanner kb, FoodTruck[] truckList) {
+	public void viewRatings(FoodTruck[] truckList) {
 		if (truckList == null) {
 			System.out.println("You have not entered any data in yet!");
 		}
@@ -94,30 +96,30 @@ public class FoodTruckApp {
 				System.out.println(truckList[i].output());
 			}
 		}
-		run(truckList);
 	}
 	
 	// Exception prevents user from accidently erasing list
-	public void exception(Scanner kb, FoodTruck[] truckList, boolean run) {
+	public boolean exception(Scanner kb, FoodTruck[] truckList, boolean run) {
+		run = true;
 		if (truckList != null) {
 			System.out.print("This will reset the food truck list.  Continue?  (Y / N) ");
 			String exceptionResponse = kb.next();
 			if (exceptionResponse.equalsIgnoreCase("Y")) {
-				run = false;
+				run = true;
 			}
 			else if (exceptionResponse.equalsIgnoreCase("N")) {
 				System.out.println("Roger! Returning to menu.\n");
-				run(truckList);
+				run = false;
 			}
 			else {
 				System.out.println("Invalid response.  Returning to menu.\n");
-				run(truckList);
-				
+				run = false;
 			}
 		}
+		return run;
 	}
 	
-	// Case 4:  Returns average rating
+	// Case 3:  Returns average rating
 	public void averageRatings(FoodTruck[] truckList) {
 		if (truckList == null) {
 			System.out.println("You have not entered any data in yet!");
@@ -129,10 +131,9 @@ public class FoodTruckApp {
 			}
 			System.out.printf("The average food truck rating is %.2f%n", sum/truckList.length);
 		}
-		run(truckList);
 	}
 	
-	// Case 5:  Returns best rated
+	// Case 4:  Returns best rated
 	public void bestRated(FoodTruck[] truckList) {
 		if (truckList == null) {
 			System.out.println("You have not entered any data in yet!");
@@ -146,13 +147,7 @@ public class FoodTruckApp {
 					bestTruck = truckList[i].output();
 				}
 			} System.out.println(bestTruck);
-			
 		}
-		run(truckList);
 	}
 	
-	// Quits program
-	public void quit() {
-		System.out.println("\n~ Ciao! ~");
-	}
 }
