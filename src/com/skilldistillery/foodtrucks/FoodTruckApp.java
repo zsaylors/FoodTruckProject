@@ -87,9 +87,10 @@ public class FoodTruckApp {
 			int rating = kb.nextInt();
 			kb.nextLine();
 
+			//truck[i] = new FoodTruck(truckName, foodType, rating);
 			truck[i] = new FoodTruck();
-			truck[i].setTruckName(truckName);
 			truck[i].setFoodType(foodType);
+			truck[i].setTruckName(truckName);
 			truck[i].setRating(rating);
 			}
 		}
@@ -123,10 +124,11 @@ public class FoodTruckApp {
 	
 	// CASE 2:   List all existing food trucks.
 	public void viewRatings(FoodTruck[] truckList) {
-		if (truckList == null) {
+		if (truckList == null || truckList.length == 0) {
 			System.out.println("You have not entered any data in yet!");
 		}
 		else {
+			System.out.println(truckList.length);
 			System.out.println("ID \t Name \t Food Type \t Rating");
 			for (int i = 0; i < truckList.length; i++) {
 				System.out.println(truckList[i].toString());
@@ -136,7 +138,7 @@ public class FoodTruckApp {
 	
 	// CASE 3:  Returns average rating
 	public void averageRatings(FoodTruck[] truckList) {
-		if (truckList == null) {
+		if (truckList == null || truckList.length == 0) {
 			System.out.println("You have not entered any data in yet!");
 		}
 		else {
@@ -150,7 +152,7 @@ public class FoodTruckApp {
 	
 	// CASE 4:  Returns best rated
 	public void bestRated(FoodTruck[] truckList) {
-		if (truckList == null) {
+		if (truckList == null || truckList.length == 0) {
 			System.out.println("You have not entered any data in yet!");
 		}
 		else {

@@ -64,6 +64,4 @@ public class FoodTruck {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	
-	
 }
