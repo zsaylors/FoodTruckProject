@@ -6,16 +6,13 @@ import java.util.Scanner;
 public class FoodTruckApp {
 	
 	public static void main(String[] args) {
+		Scanner kb = new Scanner(System.in);
 		FoodTruckApp app = new FoodTruckApp();
 		FoodTruck[] truck = null;
-		app.run(truck);
-	}
-	
-	public void run(FoodTruck[] truck) {
-		Scanner kb = new Scanner(System.in);
-		menuSelection(kb, truck);
+		app.menuSelection(kb, truck);
 		kb.close();
 	}
+	
 	
 	// Gets user input via scanner and returns a populated FoodTruck[] array.
 	public FoodTruck[] getUserInput(Scanner kb, FoodTruck[] truck) {
@@ -24,12 +21,27 @@ public class FoodTruckApp {
 		int numOfTrucks = kb.nextInt();
 		kb.nextLine();  // resolves nextLine errors
 		truck = new FoodTruck[numOfTrucks];
+		FoodTruck[] newTruck = null;
 		
 		// For Loop gets name, food type, and rating
 		for (int i = 0; i < numOfTrucks; i++) {	
 			System.out.println("\n-- Truck " + (i + 1) + " --");
 			System.out.print("Food truck name: ");
 			String truckName = kb.nextLine();
+			
+			
+			
+			if (truckName.equalsIgnoreCase("quit")) {	
+				newTruck = new FoodTruck[i];		
+				for (int z = 0; z < newTruck.length; z++) {
+					newTruck[z] = truck[z];
+				}
+
+				
+			} else {
+			
+			
+			
 			System.out.print("Food type: ");
 			String foodType = kb.nextLine();
 			System.out.print("numeric rating (1-5): ");
@@ -37,11 +49,25 @@ public class FoodTruckApp {
 			kb.nextLine(); // resolves nextLine errors
 
 			truck[i] = new FoodTruck(truckName, foodType, rating);
+			}
+
 		}
+		
 		System.out.println("\nDone with input.  Returning to menu.");
-		// Updated menu.  Entering 2-4 will now return appropriate values.
-		menuSelection(kb, truck);
-		return truck;
+		//menuSelection(kb, truck);
+		
+		if (newTruck != null) {
+			for (int y = 0; y < newTruck.length; y++) {
+				System.out.println(newTruck[y].output());
+			}
+			System.out.println(newTruck.length);
+			menuSelection(kb, newTruck);
+			return newTruck;
+		} 
+		else {
+			menuSelection(kb, truck);
+			return truck;
+		}
 	}
 
 	// Menu selection and outputs
