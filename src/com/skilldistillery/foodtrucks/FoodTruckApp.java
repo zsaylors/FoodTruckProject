@@ -1,6 +1,5 @@
 package com.skilldistillery.foodtrucks;
 
-import java.awt.List;
 import java.util.Scanner;
 
 public class FoodTruckApp {
@@ -12,70 +11,13 @@ public class FoodTruckApp {
 		app.menuSelection(kb, truck);
 		kb.close();
 	}
-	
-	
-	// Gets user input via scanner and returns a populated FoodTruck[] array.
-	public FoodTruck[] getUserInput(Scanner kb, FoodTruck[] truck) {
-		// Determines array size.
-		System.out.print("How many food trucks are you adding? ");
-		int numOfTrucks = kb.nextInt();
-		kb.nextLine();  // resolves nextLine errors
-		truck = new FoodTruck[numOfTrucks];
-		FoodTruck[] newTruck = null;
-		
-		// For Loop gets name, food type, and rating
-		for (int i = 0; i < numOfTrucks; i++) {	
-			System.out.println("\n-- Truck " + (i + 1) + " --");
-			System.out.print("Food truck name: ");
-			String truckName = kb.nextLine();
-			
-			
-			
-			if (truckName.equalsIgnoreCase("quit")) {	
-				newTruck = new FoodTruck[i];		
-				for (int z = 0; z < newTruck.length; z++) {
-					newTruck[z] = truck[z];
-				}
 
-				
-			} else {
-			
-			
-			
-			System.out.print("Food type: ");
-			String foodType = kb.nextLine();
-			System.out.print("numeric rating (1-5): ");
-			int rating = kb.nextInt();
-			kb.nextLine(); // resolves nextLine errors
-
-			truck[i] = new FoodTruck(truckName, foodType, rating);
-			}
-
-		}
-		
-		System.out.println("\nDone with input.  Returning to menu.");
-		//menuSelection(kb, truck);
-		
-		if (newTruck != null) {
-			for (int y = 0; y < newTruck.length; y++) {
-				System.out.println(newTruck[y].output());
-			}
-			System.out.println(newTruck.length);
-			menuSelection(kb, newTruck);
-			return newTruck;
-		} 
-		else {
-			menuSelection(kb, truck);
-			return truck;
-		}
-	}
-
-	// Menu selection and outputs
+	// MENU
 	public void menuSelection(Scanner kb, FoodTruck[] truck) {
 		boolean run = true;
 		while(run) {
 			menu();
-			// String used rather than int, so user entered strings or chars won't break program.
+			// Note: String used rather than integer, so user entered strings or chars will throw default exception.
 			String userSelection = kb.next();
 			switch(userSelection) {
 				case "1": if (exception(kb, truck, run)) {
@@ -98,7 +40,7 @@ public class FoodTruckApp {
 		}
 	}
 	
-	// Visual menu
+	// VISUAL MENU
 	public void menu() {
 		StringBuilder menu = new StringBuilder
 					   ("____________________\n")
@@ -112,19 +54,50 @@ public class FoodTruckApp {
 		System.out.println(menu);
 	}
 
-	// CASE 2:   List all existing food trucks.
-	public void viewRatings(FoodTruck[] truckList) {
-		if (truckList == null) {
-			System.out.println("You have not entered any data in yet!");
-		}
-		else {
-			for (int i = 0; i < truckList.length; i++) {
-				System.out.println(truckList[i].output());
+	// CASE 1 - Rate trucks - Gets input and puts it in truck[] array
+	public FoodTruck[] getUserInput(Scanner kb, FoodTruck[] truck) {
+		
+		// A) Determines array size.
+		System.out.print("How many food trucks are you adding? ");
+		int numOfTrucks = kb.nextInt();
+		kb.nextLine();  // resolves nextLine errors
+		truck = new FoodTruck[numOfTrucks];
+		FoodTruck[] newTruck = null;
+		
+		// B) For Loop gets name, food type, and rating
+		for (int i = 0; i < numOfTrucks; i++) {	
+			System.out.println("\n-- Truck " + (i + 1) + " --");
+			System.out.print("Food truck name: ");
+			String truckName = kb.nextLine();
+			
+			// B1) If quit is entered, a newTruck[] is created and returned
+			if (truckName.equalsIgnoreCase("quit")) {	
+				newTruck = new FoodTruck[i];		
+				for (int i2 = 0; i2 < newTruck.length; i2++) {
+					newTruck[i2] = truck[i2];
+				}
+				menuSelection(kb, newTruck);
+				return newTruck;
+			} else {
+
+			// B2) Continues loop is quit is not entered
+			System.out.print("Food type: ");
+			String foodType = kb.nextLine();
+			System.out.print("numeric rating (1-5): ");
+			int rating = kb.nextInt();
+			kb.nextLine();
+
+			truck[i] = new FoodTruck(truckName, foodType, rating);
 			}
 		}
+		
+		// C) Returns truck (if B1 does not occur), and returns to menu.
+		System.out.println("\nDone with input.  Returning to menu.");
+		menuSelection(kb, truck);
+		return truck;
 	}
 	
-	// Exception prevents user from accidently erasing list
+	// CASE 1 Exception: prevents user from accidently erasing list
 	public boolean exception(Scanner kb, FoodTruck[] truckList, boolean run) {
 		run = true;
 		if (truckList != null) {
@@ -145,7 +118,19 @@ public class FoodTruckApp {
 		return run;
 	}
 	
-	// Case 3:  Returns average rating
+	// CASE 2:   List all existing food trucks.
+	public void viewRatings(FoodTruck[] truckList) {
+		if (truckList == null) {
+			System.out.println("You have not entered any data in yet!");
+		}
+		else {
+			for (int i = 0; i < truckList.length; i++) {
+				System.out.println(truckList[i].output());
+			}
+		}
+	}
+	
+	// CASE 3:  Returns average rating
 	public void averageRatings(FoodTruck[] truckList) {
 		if (truckList == null) {
 			System.out.println("You have not entered any data in yet!");
@@ -159,7 +144,7 @@ public class FoodTruckApp {
 		}
 	}
 	
-	// Case 4:  Returns best rated
+	// CASE 4:  Returns best rated
 	public void bestRated(FoodTruck[] truckList) {
 		if (truckList == null) {
 			System.out.println("You have not entered any data in yet!");
