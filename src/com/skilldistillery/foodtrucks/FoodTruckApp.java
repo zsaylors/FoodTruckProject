@@ -83,22 +83,19 @@ public class FoodTruckApp {
 			// B2) Continues loop is quit is not entered
 			System.out.print("Food type: ");
 			String foodType = kb.nextLine();
-			System.out.print("numeric rating (1-5): ");
-			
-			
-			
+			System.out.print("numeric rating (0-5): ");
 			int rating = kb.nextInt();
-			while (rating > 5) {
-				System.out.print("Error, enter a rating 1 - 5: ");
+			while (rating > 5) {  	 // Ensures rating is integer 0-5
+				System.out.print("Error.  Ratings must be a value 0 - 5: ");
 				rating = kb.nextInt();
 			}
 			kb.nextLine();
 
-			//truck[i] = new FoodTruck(truckName, foodType, rating);
-			truck[i] = new FoodTruck();
-			truck[i].setFoodType(foodType);
-			truck[i].setTruckName(truckName);
-			truck[i].setRating(rating);
+			truck[i] = new FoodTruck(truckName, foodType, rating);
+//			truck[i] = new FoodTruck();
+//			truck[i].setFoodType(foodType);
+//			truck[i].setTruckName(truckName);
+//			truck[i].setRating(rating);
 			}
 		}
 		
@@ -135,8 +132,6 @@ public class FoodTruckApp {
 			System.out.println("You have not entered any data in yet!");
 		}
 		else {
-			System.out.println(truckList.length);
-			System.out.println("ID \t Name \t Food Type \t Rating");
 			for (int i = 0; i < truckList.length; i++) {
 				System.out.println(truckList[i].toString());
 			}

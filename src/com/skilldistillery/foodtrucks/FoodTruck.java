@@ -3,7 +3,8 @@ package com.skilldistillery.foodtrucks;
 public class FoodTruck {
 
 	// F I E L D S
-	private static int truckId = 0;
+	private static int truckId = 1;
+	private int newTruckId = 0;
 	private String truckName;
 	private String foodType;
 	private int rating;
@@ -15,10 +16,11 @@ public class FoodTruck {
 	
 	public FoodTruck(String truckName, String foodType, int rating) {
 		this(0, truckName, foodType, rating);
+		newTruckId = assignId();
 	}
 	
-	public FoodTruck(int truckId, String truckName, String foodType, int rating) {
-		FoodTruck.truckId = truckId;
+	public FoodTruck(int newTruckId, String truckName, String foodType, int rating) {
+		this.newTruckId = newTruckId;
 		this.truckName = truckName;
 		this.foodType = foodType;
 		this.rating = rating;
@@ -27,15 +29,20 @@ public class FoodTruck {
 	// M E T H O D S
 	public String toString() {
 		StringBuilder menu = new StringBuilder("ID: ")
-						.append(truckId++)
-						.append("\tTruck Name: ")
-						.append(getTruckName())
-						.append("\tFood Type: ")
+						.append(newTruckId)
+						.append(",  Truck Name: ")
+						.append(truckName)
+						.append(",  Food Type: ")
 						.append(foodType)
-						.append("\tRating: ")
+						.append(",  Rating: ")
 						.append("(" + rating + "/5) ")
 						.append(getStars());
 		return menu.toString();
+	}
+	
+	int assignId() {
+		this.newTruckId = truckId++;
+		return newTruckId;
 	}
 
 	public String getTruckName() {
@@ -43,9 +50,9 @@ public class FoodTruck {
 	}
 
 
-	public void setTruckName(String truckName) {
-		this.truckName = truckName;
-	}
+//	public void setTruckName(String truckName) {
+//		this.truckName = truckName;
+//	}
 
 
 	public String getFoodType() {
@@ -53,21 +60,20 @@ public class FoodTruck {
 	}
 
 
-	public void setFoodType(String foodType) {
-		this.foodType = foodType;
-	}
+//	public void setFoodType(String foodType) {
+//		this.foodType = foodType;
+//	}
 	
 	public int getRating() {
 		return rating;
 	}
 
 
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
+//	public void setRating(int rating) {
+//		this.rating = rating;
+//	}
 	
-	public String getStars() {
-		//int a = getRating() - 5;
+	private String getStars() {
 		String stars = "";
 		for (int i = 0; i < getRating(); i++) {
 			stars += " \u2b50";
