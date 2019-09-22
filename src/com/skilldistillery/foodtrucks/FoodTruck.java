@@ -47,18 +47,29 @@ public class FoodTruck {
 		truckId = 1;
 	}
 
-	public String getTruckName() {
-		return truckName;
-	}
-
-	public String getFoodType() {
-		return foodType;
-	}
-
 	public int getRating() {
 		return rating;
 	}
+	
 
+	private String getStars() {
+		String stars = "";
+		for (int i = 0; i < getRating() && i < 5; i++) {
+			stars += " \u2b50";
+		}
+		return stars;
+	}
+
+//  Below setters and getters not used, as program stands.
+//
+//	public String getFoodType() {
+//	return foodType;
+//	}	
+//	
+//	public String getTruckName() {
+//		return truckName;
+//	}
+//
 //	public void setTruckName(String truckName) {
 //		this.truckName = truckName;
 //	}
@@ -70,12 +81,5 @@ public class FoodTruck {
 //	public void setRating(int rating) {
 //		this.rating = rating;
 //	}
-
-	private String getStars() {
-		String stars = "";
-		for (int i = 0; i < getRating() && i < 5; i++) {
-			stars += " \u2b50";
-		}
-		return stars;
-	}
+	
 }

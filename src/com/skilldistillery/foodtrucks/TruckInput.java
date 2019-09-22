@@ -16,11 +16,14 @@ public class TruckInput extends FoodTruckApp {
 			try {
 				System.out.print("How many food trucks are you adding? ");
 				numOfTrucks = kb.nextInt();
+				if (numOfTrucks <= 0 || numOfTrucks > 2000) {
+					System.out.println("Invalid entry.  Must be 1 - 2000.");
+				}
 			} catch (InputMismatchException e) {
-				System.out.print("Invalid entry. ");
+				System.out.println("Invalid entry.  Must be 1 - 2000.");
 				kb.next();
 			}
-		} while (numOfTrucks <= 0);
+		} while (numOfTrucks <= 0 || numOfTrucks > 2000);
 		kb.nextLine(); // resolves nextLine errors
 
 		// B) Creates new truck array and initializes newTruck in case "quit" is entered.
@@ -70,10 +73,11 @@ public class TruckInput extends FoodTruckApp {
 
 				// F) New food truck is created
 				truck[i] = new FoodTruck(truckName, foodType, rating);
-//			truck[i] = new FoodTruck();
-//			truck[i].setFoodType(foodType);
-//			truck[i].setTruckName(truckName);
-//			truck[i].setRating(rating);
+//				This was testing the setters.  This is another way to do it.
+//				truck[i] = new FoodTruck();
+//				truck[i].setFoodType(foodType);
+//				truck[i].setTruckName(truckName);
+//				truck[i].setRating(rating);
 			}
 		}
 
